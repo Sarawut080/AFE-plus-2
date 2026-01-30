@@ -30,7 +30,7 @@ interface ReplyNotificationPostback {
     type            : string;
     message         : string;
     replyToken      : string;
-    bgColor         ?: string;
+    bgColor        ?: string;
 }
 interface ReplyNotificationPostbackTemp{
     userId          : number;
@@ -1064,7 +1064,7 @@ export const replyUserData = async ({
 export const replyNotification = async ({
     replyToken,
     message,
-    bgColor = "#f60909"
+    bgColor = "#be1717"
 }: ReplyNotification) => {
     try {
         const requestData = {
@@ -1077,9 +1077,9 @@ export const replyNotification = async ({
                         type: "bubble",
                         styles: {
                             body: {
-                                backgroundcolor: bgColor
+                                backgroundColor: bgColor
                             }
-                        },
+                        },                       
                         body: {
                             type    : "box",
                             layout  : "vertical",
@@ -1151,7 +1151,7 @@ export const replyNotificationPostback = async ({
     type,
     message,
     replyToken,
-    bgColor = "#f70404"
+    bgColor = "#f6ab14"
     
 }: ReplyNotificationPostback ) => {
     try {
@@ -1165,7 +1165,7 @@ export const replyNotificationPostback = async ({
                         type: "bubble",
                         styles: {
                             body: {
-                                backgroundcolor: bgColor
+                                backgroundColor: bgColor
                             }
                         },
                         body: {
@@ -1178,7 +1178,7 @@ export const replyNotificationPostback = async ({
                                     contents: [
                                         {
                                             type      : "span",
-                                            text      : `ค่าสีที่ได้รับคือ: ${bgColor}`,
+                                            text      : "แจ้งเตือนเขตปลอดภัย",
                                             color     : (bgColor === "#FFC107") ? "#000000" : "#ffffff",
                                             size      : "xl",
                                             weight    : "bold",
@@ -1205,7 +1205,7 @@ export const replyNotificationPostback = async ({
                                     contents:[
                                         {
                                             type      : "span",
-                                            text      : message,
+                                            text      : `ค่าสีที่ได้รับคือ: ${bgColor}`,
                                             color     : (bgColor === "#FFC107") ? "#000000" : "#ffffff",
                                             size      : "md",
                                             // decoration: "none",
@@ -1269,7 +1269,7 @@ export const replyNotificationPostback = async ({
 
 export const replyNotificationSOS = async ({
     replyToken,
-    message
+    message    
 }: ReplyNotification) => {
     try {
 
@@ -1608,7 +1608,7 @@ export const replyNotificationPostbackfall = async ({
                                     contents:[
                                         {
                                             type      : "span",
-                                            text      : message,
+                                            text      : `${message}`,
                                             color     : "#555555",
                                             size      : "md",
                                             // decoration: "none",
