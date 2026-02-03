@@ -240,17 +240,18 @@ const ElderlyRegistration = () => {
     }
 
     const onSubmit = async (formData: ElderlyRegistrationFormData) => {
+        if(!dataUser.users_id){
+            setAlert({ 
+                show: true, 
+                message: 'ไม่พบข้อมูลผู้ใช้',
+                showClose: true,
+                autoCloseMs: undefined,
+                messageClassName: undefined
+            })
+            throw new Error('ไม่พบข้อมูลผู้ใช้');
+        }
+        
         try {
-            if(!dataUser.users_id){
-                setAlert({ 
-                    show: true, 
-                    message: 'ไม่พบข้อมูลผู้ใช้',
-                    showClose: true,
-                    autoCloseMs: undefined,
-                    messageClassName: undefined
-                })
-                return;
-            }
 
             const data = {
                 users_id         : dataUser.users_id,
@@ -298,6 +299,7 @@ const ElderlyRegistration = () => {
                 autoCloseMs: undefined,
                 messageClassName: undefined
             })
+            throw error; // ✅ Re-throw เพื่อให้ onConfirmSubmit จัดการ
         }
     };
 

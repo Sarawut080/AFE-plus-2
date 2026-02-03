@@ -209,17 +209,18 @@ const Registration = () => {
     }
 
     const onSubmit = async (formData: RegistrationFormData) => {
+        if (!dataUser.data && (!formData.users_passwd || !formData.users_passwd_comfirm)) {
+            setAlert({ 
+                show: true, 
+                message: 'กรุณากรอกรหัสผ่าน',
+                showClose: true,
+                autoCloseMs: undefined,
+                messageClassName: undefined
+            });
+            throw new Error('กรุณากรอกรหัสผ่าน');
+        }
+        
         try {
-            if (!dataUser.data && (!formData.users_passwd || !formData.users_passwd_comfirm)) {
-                setAlert({ 
-                    show: true, 
-                    message: 'กรุณากรอกรหัสผ่าน',
-                    showClose: true,
-                    autoCloseMs: undefined,
-                    messageClassName: undefined
-                });
-                return;
-            }
 
             const data = {
                 users_line_id: router.query.auToken,
@@ -255,6 +256,7 @@ const Registration = () => {
                 autoCloseMs: undefined,
                 messageClassName: undefined
             })
+            throw error; // ✅ Re-throw เพื่อให้ onConfirmSubmit จัดการ
         }
     };
 
