@@ -327,6 +327,7 @@ const Registration = () => {
                                     id="users_passwd" 
                                     placeholder="กรอกรหัสผ่าน" 
                                     type="password" 
+                                    disabled={!!dataUser.data}
                                     {...register("users_passwd")}
                                     isInvalid={!!errors.users_passwd}
                                     errorMessage={errors.users_passwd?.message}
@@ -337,6 +338,7 @@ const Registration = () => {
                                     label="ยืนยันรหัสผ่าน" 
                                     id="users_passwd_comfirm" 
                                     type="password" 
+                                    disabled={!!dataUser.data}
                                     placeholder="กรอกยืนยันรหัสผ่าน" 
                                     {...register("users_passwd_comfirm")}
                                     isInvalid={!!errors.users_passwd_comfirm}
@@ -447,8 +449,7 @@ const Registration = () => {
                         max={5}
                         disabled={!!dataUser.data}
                         {...register("users_postcode")}
-                        isInvalid={!!errors.users_postcode}
-                        errorMessage={errors.users_postcode?.message}
+                        //isInvalid={!!errors.users_postcode} read-only ไม่ควรมีerror message
                         isValid={isFieldValid("users_postcode")}
                         readOnly // 🔥 ทำให้เป็น read-only เพราะจะถูกกรอกอัตโนมัติ
                         required
