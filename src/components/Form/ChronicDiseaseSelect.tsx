@@ -232,7 +232,7 @@ const ChronicDiseaseSelect: React.FC<ChronicDiseaseSelectProps> = ({
         isSearchable
         isDisabled={disabled}
         value={selected}
-        options={options}
+        options={allowCustom ? options.filter(opt => opt.value !== "อื่นๆ") : options}
         placeholder={placeholder}
         filterOption={(candidate, input) => {
           const term = input.trim();
