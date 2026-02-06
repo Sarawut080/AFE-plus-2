@@ -24,7 +24,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { elderlyRegistrationSchema, ElderlyRegistrationFormData } from '@/components/validations/elderlyRegistrationSchema';
 
-// 🔥 Import Hook
+import ChronicDiseaseSelect from '@/components/Form/ChronicDiseaseSelect';
 import { useThaiAddress } from '@/hooks/useThaiAddress';
 
 import axios from 'axios';
@@ -596,14 +596,27 @@ const ElderlyRegistration = () => {
                         errorMessage={errors.takecare_tel_home?.message}
                         isValid={isFieldValid("takecare_tel_home")}
                     />
-                    <InputLabel 
-                        label="โรคประจำตัว" 
-                        id="takecare_disease" 
-                        placeholder="กรอกโรคประจำตัว"
-                        disabled={!!dataUser.data}
-                        {...register("takecare_disease")}
-                        isValid={isFieldValid("takecare_disease")}
-                    />
+                    <Form.Group className="mb-3">
+                        <Controller
+                            name="takecare_disease"
+                            control={control}
+                            render={({ field }) => (
+                                <ChronicDiseaseSelect
+                                    initialValue={field.value || ""}
+                                    onChange={(value) => {
+                                        field.onChange(value);
+                                    }}
+                                    label="โรคประจำตัว"
+                                    placeholder="กรอกโรคประจำตัว"
+                                />
+                            )}
+                        />
+                        {errors.takecare_disease && (
+                            <Form.Control.Feedback type="invalid" style={{ display: 'block' }}>
+                                {errors.takecare_disease.message}
+                            </Form.Control.Feedback>
+                        )}
+                    </Form.Group>
 
                     <InputLabel 
                         label="ยาที่ใช้ประจำ" 

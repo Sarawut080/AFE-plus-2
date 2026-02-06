@@ -15,6 +15,7 @@ import SelectAddress from '@/components/Form/SelectAddress';
 import ModalAlert from '@/components/Modals/ModalAlert'
 import ButtonState from '@/components/Button/ButtonState';
 import DatePickerX from '@/components/DatePicker/DatePickerX';
+import ChronicDiseaseSelect from '@/components/Form/ChronicDiseaseSelect';
 
 // 🔥 Import Validation
 import { useForm, Controller } from 'react-hook-form';
@@ -262,7 +263,7 @@ const Puserinfo = () => {
         setConfirmShow(true);
     };
 
-if (dataUser.isLogin) return <div>loading...</div>;
+//if (dataUser.isLogin) return <div>loading...</div>;
 
     return (
         <Container>
@@ -519,13 +520,27 @@ if (dataUser.isLogin) return <div>loading...</div>;
                         isValid={isFieldValid("takecare_tel_home")}
                     />
 
-                    <InputLabel 
-                        label="โรคประจำตัว" 
-                        id="takecare_disease" 
-                        placeholder="กรอกโรคประจำตัว"
-                        {...register("takecare_disease")}
-                        isValid={isFieldValid("takecare_disease")}
-                    />
+                    <Form.Group className="mb-3">
+                        <Controller
+                            name="takecare_disease"
+                            control={control}
+                            render={({ field }) => (
+                                <ChronicDiseaseSelect
+                                    initialValue={field.value || ""}
+                                    onChange={(value) => {
+                                        field.onChange(value);
+                                    }}
+                                    label="โรคประจำตัว"
+                                    placeholder="กรอกโรคประจำตัว"
+                                />
+                            )}
+                        />
+                        {errors.takecare_disease && (
+                            <Form.Control.Feedback type="invalid" style={{ display: 'block' }}>
+                                {errors.takecare_disease.message}
+                            </Form.Control.Feedback>
+                        )}
+                    </Form.Group>
 
                     <InputLabel 
                         label="ยาที่ใช้ประจำ" 
