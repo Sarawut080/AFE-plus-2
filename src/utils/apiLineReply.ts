@@ -944,8 +944,6 @@ export const replyUserInfo = async ({
                                     ]
 
                                 },
-
-
                                 {
                                     type: "button",
                                     style: "primary",
@@ -1091,6 +1089,7 @@ export const replyNotification = async ({
                                 {
                                     type: "text",
                                     text: " ",
+                                    align: "center",
                                     contents: [
                                         {
                                             type: "span",
@@ -1115,6 +1114,7 @@ export const replyNotification = async ({
                                 {
                                     type: "text",
                                     text: " ",
+                                    align: "center",
                                     wrap: true,
                                     lineSpacing: "5px",
                                     margin: "md",
@@ -1173,6 +1173,7 @@ export const replyNotificationPostback = async ({
                                 {
                                     type: "text",
                                     text: " ",
+                                    align: "center",
                                     contents: [
                                         {
                                             type: "span",
@@ -1197,6 +1198,7 @@ export const replyNotificationPostback = async ({
                                 {
                                     type: "text",
                                     text: " ",
+                                    align: "center",
                                     wrap: true,
                                     lineSpacing: "5px",
                                     margin: "md",
@@ -1229,6 +1231,17 @@ export const replyNotificationPostback = async ({
                                     }
                                 },
                                 {
+                                            type: 'button',
+                                            color: "#1976D2",
+                                            style: 'primary',
+                                            height: 'sm',
+                                            action: {
+                                                type: 'uri',
+                                                label: 'ดูแผนที่จากระบบ',
+                                                //uri: `${WEB_API}/location?auToken=${userData.users_line_id}&idsafezone=${safezoneData.safezone_id}&idlocation=${locationData ? locationData.location_id : ''}`
+                                            }
+                                        },
+                                {
                                     type: "text",
                                     text: " ",
                                     wrap: true,
@@ -1238,7 +1251,7 @@ export const replyNotificationPostback = async ({
                                         {
                                             type: "span",
                                             text: "*หมาย: ข้าพเจ้ายินยอมเปิดเผยข้อมูลตำแหน่งปัจจุบันของผู้ที่มีภาวะพึ่งพิง",
-                                            color: "#FC0303",
+                                            color: "#484848",
                                             size: "md",
                                             // decoration: "none",
                                             // wrap      : true
