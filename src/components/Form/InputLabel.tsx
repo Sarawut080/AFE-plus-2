@@ -1,6 +1,7 @@
 import React, { ChangeEvent, forwardRef } from 'react'
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { sanitizeDigits } from '@/utils/inputSanitizers';
 
 interface Props {
     onChange?: ((value: string | number) => void) | React.ChangeEventHandler<HTMLInputElement>;
@@ -14,6 +15,7 @@ interface Props {
     disabled?: boolean;
     readOnly?: boolean; // 🔥 เพิ่ม readOnly
     max?: number;
+    numericOnly?: boolean;
     // รับค่าสถานะ Error และ Success
     isInvalid?: boolean;
     errorMessage?: string;
@@ -35,6 +37,7 @@ const InputLabel = forwardRef<HTMLInputElement, Props>((props, ref) => {
         disabled = false, 
         readOnly = false, // 🔥 รับค่า readOnly
         max = null, 
+        numericOnly = false,
         isInvalid = false, 
         errorMessage = '',
         isValid,
@@ -48,6 +51,10 @@ const InputLabel = forwardRef<HTMLInputElement, Props>((props, ref) => {
             maxLength: max
         }
     }
+
+    const numericAttrs: { inputMode?: 'numeric'; pattern?: string } = numericOnly
+        ? { inputMode: 'numeric', pattern: '[0-9]*' }
+        : {};
 
     return (
         <Form.Group className="mb-3">
@@ -72,9 +79,16 @@ const InputLabel = forwardRef<HTMLInputElement, Props>((props, ref) => {
                     isValid={isValid}
 
                     {...inputCustom}
+                    {...numericAttrs}
                     {...rest}
 
                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        if (numericOnly) {
+                            const sanitized = sanitizeDigits(e.target.value);
+                            if (sanitized !== e.target.value) {
+                                e.target.value = sanitized;
+                            }
+                        }
                         // ถ้ามี onChange จาก rest ให้ใช้ตัวนั้นก่อน
                         if (typeof rest.onChange === 'function') {
                             rest.onChange(e)

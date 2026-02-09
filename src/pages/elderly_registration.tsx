@@ -492,6 +492,7 @@ const ElderlyRegistration = () => {
                         max={5}
                         disabled={!!dataUser.data}
                         {...register("takecare_moo")}
+                        numericOnly
                         isValid={isFieldValid("takecare_moo")}
                     />
 

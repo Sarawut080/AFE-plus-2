@@ -263,7 +263,7 @@ const Puserinfo = () => {
         setConfirmShow(true);
     };
 
-if (dataUser.isLogin) return <div>loading...</div>;
+//if (dataUser.isLogin) return <div>loading...</div>;
 
     return (
         <Container>
@@ -390,6 +390,7 @@ if (dataUser.isLogin) return <div>loading...</div>;
                         placeholder="1"  
                         max={5}
                         {...register("takecare_moo")}
+                        numericOnly
                         isValid={isFieldValid("takecare_moo")}
                     />
 

@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { optionalDigitsRule } from './commonRules';
 
 // --- 1. กฎพื้นฐาน ---
 export const phoneRule = z
@@ -51,7 +52,7 @@ export const userEditSchema = z.object({
     .regex(/^[0-9]+$/, "ต้องเป็นตัวเลขเท่านั้น"),
 
   users_number: z.string().optional(),
-  users_moo: z.string().optional(),
+  users_moo: optionalDigitsRule,
   users_road: z.string().optional(),
   
   users_tubon: z.string({

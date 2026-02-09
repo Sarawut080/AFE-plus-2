@@ -409,6 +409,7 @@ const Registration = () => {
                         placeholder="1" 
                         disabled={!!dataUser.data} 
                         {...register("users_moo")}
+                        numericOnly
                         isValid={isFieldValid("users_moo")}
                     />
                     <InputLabel 

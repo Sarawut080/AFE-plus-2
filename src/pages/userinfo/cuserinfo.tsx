@@ -268,6 +268,7 @@ const Cuserinfo = () => {
                         placeholder="1" 
                         max={5}
                         {...register("users_moo")}
+                        numericOnly
                         isValid={isFieldValid("users_moo")}
                     />
 

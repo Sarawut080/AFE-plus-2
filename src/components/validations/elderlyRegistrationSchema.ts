@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { optionalDigitsRule } from './commonRules';
 
 // --- 1. กฎพื้นฐาน ---
 export const phoneRule = z
@@ -67,7 +68,7 @@ export const elderlyRegistrationSchema = z.object({
   }).min(1, "กรุณาเลือกสถานะการสมรส"),
 
   takecare_number: z.string().optional(),
-  takecare_moo: z.string().optional(),
+  takecare_moo: optionalDigitsRule,
   takecare_road: z.string().optional(),
   
   takecare_tubon: z.string({
