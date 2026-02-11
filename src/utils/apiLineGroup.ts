@@ -38,6 +38,11 @@ interface ReplyNoti {
     replyToken : string;
     message    : string;
     userIdAccept: string;
+    action?: {
+        label: string;
+        data: string;
+        color?: string;
+    };
 }
 
 export const getUserProfile = async (userId: string) => {
@@ -201,18 +206,6 @@ export const replyNotification = async ({
                                         style: 'primary',
                                         height: 'sm',
                                         margin: 'xxl',
-                                        color: '#4477CE',
-                                        action: {
-                                            type: 'postback',
-                                            label: 'ปิดเคสช่วยเหลือ',
-                                            data: `type=close&takecareId=${resTakecareperson.takecare_id}&extenId=${extendedHelpId}&userLineId=${resUser.users_line_id}`,
-                                        },
-                                    },
-                                    {
-                                        type: 'button',
-                                        style: 'primary',
-                                        height: 'sm',
-                                        margin: 'xxl',
                                         color: '#f10000',
                                         action: {
                                             type: 'uri',
@@ -260,12 +253,48 @@ export const replyNotification = async ({
 export const replyNoti = async ({
     replyToken,
     userIdAccept,
-    message
+    message,
+    action
 }: ReplyNoti) => {
     try {
         const profile = await getUserProfile(userIdAccept);
         const displayName = profile?.displayName || 'ผู้ใช้งาน';
         const messageText = message || 'ไม่มีข้อความ';
+        const bodyContents: any[] = [
+            header1()[0],
+            header1()[1],
+            {
+                type: "text",
+                text: `คุณ ${displayName}`,
+                wrap: true,
+                margin: "md",
+                color: "#555555",
+                size: "md"
+            },
+            {
+                type: "text",
+                text: messageText,
+                wrap: true,
+                margin: "md",
+                color: "#555555",
+                size: "md"
+            }
+        ];
+
+        if (action) {
+            bodyContents.push({
+                type: "button",
+                style: "primary",
+                height: "sm",
+                margin: "xxl",
+                color: action.color || "#4477CE",
+                action: {
+                    type: "postback",
+                    label: action.label,
+                    data: action.data,
+                },
+            });
+        }
 
         const requestData = {
             to: replyToken,
@@ -278,26 +307,7 @@ export const replyNoti = async ({
                         body: {
                             type: "box",
                             layout: "vertical",
-                            contents: [
-                                header1()[0],
-                                header1()[1],
-                                {
-                                    type: "text",
-                                    text: `คุณ ${displayName}`,
-                                    wrap: true,
-                                    margin: "md",
-                                    color: "#555555",
-                                    size: "md"
-                                },
-                                {
-                                    type: "text",
-                                    text: messageText,
-                                    wrap: true,
-                                    margin: "md",
-                                    color: "#555555",
-                                    size: "md"
-                                }
-                            ]
+                            contents: bodyContents
                         }
                     }
                 }

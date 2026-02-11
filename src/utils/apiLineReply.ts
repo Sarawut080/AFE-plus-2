@@ -133,7 +133,7 @@ interface ReplyLocationData {
 // helper ทำแถวแบบ baseline (label : value) และรองรับกำหนดสี value
 const baseline = (label: string, value: string, valueColor?: string) => ({
     type: 'box',
-    layout: 'baseline',
+    layout: 'vertical',
     contents: [
         { type: 'text', text: label, size: 'sm', color: '#555555', flex: 3, wrap: true },
         { type: 'text', text: value, size: 'sm', color: valueColor || '#111111', flex: 5, wrap: true }
@@ -199,6 +199,7 @@ export const getFlexTemplate = (
         {
             type: 'text',
             text: config.detail,
+            align: 'center',
             size: 'md',
             color: '#000000',
             wrap: true,
@@ -242,6 +243,7 @@ export const getFlexTemplate = (
                 {
                     type: 'text',
                     text: config.title,
+                    align: 'center',
                     color: '#FFFFFF',
                     size: 'lg',
                     weight: 'bold',
@@ -252,6 +254,7 @@ export const getFlexTemplate = (
         body: {
             type: 'box',
             layout: 'vertical',
+            alignItems: 'center',
             spacing: 'sm',
             contents,
         },
