@@ -38,6 +38,7 @@ interface ReplyNoti {
     replyToken : string;
     message    : string;
     userIdAccept: string;
+    title?: string;
     action?: {
         label: string;
         data: string;
@@ -80,14 +81,14 @@ const layoutBoxBaseline = (label: string, text: string, flex1 = 2, flex2 = 5) =>
     }
 }
 
-const header1 = () => {
+const header1 = (title = "แจ้งเตือนช่วยเหลือเพิ่มเติม") => {
     const h1 = {
         type: "text",
-        text: "แจ้งเตือนช่วยเหลือเพิ่มเติม",
+        text: title,
         contents: [
             {
                 type: "span",
-                text: "แจ้งเตือนช่วยเหลือเพิ่มเติม",
+                text: title,
                 color: "#FC0303",
                 size: "xl",
                 weight: "bold",
@@ -254,6 +255,7 @@ export const replyNoti = async ({
     replyToken,
     userIdAccept,
     message,
+    title,
     action
 }: ReplyNoti) => {
     try {
@@ -261,8 +263,8 @@ export const replyNoti = async ({
         const displayName = profile?.displayName || 'ผู้ใช้งาน';
         const messageText = message || 'ไม่มีข้อความ';
         const bodyContents: any[] = [
-            header1()[0],
-            header1()[1],
+            header1(title)[0],
+            header1(title)[1],
             {
                 type: "text",
                 text: `คุณ ${displayName}`,
