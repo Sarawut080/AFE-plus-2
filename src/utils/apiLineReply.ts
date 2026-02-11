@@ -1180,8 +1180,8 @@ export const replyNotification = async ({
                                     contents: [
                                         {
                                             type: "span",
-                                            text: "แจ้งเตือนเขตปลอดภัย",
-                                            color: "#FC0303",
+                                            text: "สถานะเศส",
+                                            color: "#1976D2",
                                             size: "xl",
                                             weight: "bold",
                                             decoration: "none"
